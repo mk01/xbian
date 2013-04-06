@@ -35,7 +35,7 @@
 
 start () {
 	modprobe -q zram  
-	echo 134217728 > /sys/block/zram0/disksize  >/dev/null 2>&1
+	echo 134217728 > /sys/block/zram0/disksize  
 	mkswap /dev/zram0 > /dev/null 2>&1
 	swapon -p 20 /dev/zram0  >/dev/null 2>&1
 	losetup /dev/loop0 /var/swapfile  >/dev/null 2>&1
@@ -47,7 +47,7 @@ start () {
 stop () {
 	swapoff /dev/zram0  >/dev/null 2>&1
 	swapoff /dev/loop0  >/dev/null 2>&1
-	echo 0 > /sys/block/zram0/disksize  >/dev/null 2>&1
+	echo 0 > /sys/block/zram0/disksize
 	rmmod zram  >/dev/null 2>&1
 	losetup -d /dev/loop0  >/dev/null 2>&1
 	log_action_msg "Stopping $DESC" "$NAME"
